@@ -1,6 +1,7 @@
 package com.jinli.jinrui.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.Result;
 import com.jinli.jinrui.entity.Employee;
@@ -102,5 +103,36 @@ public class EmployeeController {
         employeeService.page(pageInfo,queryWrapper);
         return Result.success(pageInfo);
     }
+
+    /**
+     * 根据id修改员工信息
+     * @param employee
+     * @return
+     */
+    @PutMapping
+    public Result<String> update(HttpServletRequest request,@RequestBody Employee employee){
+        //log.info(employee.toString());
+        Long empId = (Long) request.getSession().getAttribute("employee");
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(empId);
+        employeeService.updateById(employee);
+        return Result.success("修改成功");
+    }
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<Employee> getById(@PathVariable Long id){
+        //log.info("根据id查询员工信息...");
+        Employee employee = employeeService.getById(id);
+        if(employee != null){
+            return Result.success(employee);
+        }
+        return Result.error("没有查询到对应员工信息");
+    }
+
 
 }
