@@ -48,16 +48,20 @@ public class Employee implements Serializable {
     @TableField("status")
     private Integer status;
 
+    @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
     private LocalDateTime createTime;
 
+    @ApiModelProperty(value = "修改时间")
     @TableField("update_time")
     private LocalDateTime updateTime;
 
-    @TableField(fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "创建人")
+    @TableField(fill = FieldFill.INSERT,value = "create_user")
     private Long createUser;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "修改人")
+    @TableField(fill = FieldFill.INSERT_UPDATE,value = "update_user")
     private Long updateUser;
 
 }
