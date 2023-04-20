@@ -11,6 +11,7 @@
 	<groupId>com.jinrui</groupId>
 	<artifactId>jinrui_take_out</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>jinrui_take_out</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

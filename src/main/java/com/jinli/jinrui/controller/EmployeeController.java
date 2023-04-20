@@ -1,16 +1,15 @@
 package com.jinli.jinrui.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.Result;
 import com.jinli.jinrui.entity.Employee;
 import com.jinli.jinrui.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -64,7 +63,7 @@ public class EmployeeController {
 
     @PostMapping
     public Result<String> save(HttpServletRequest request,@RequestBody Employee employee){
-        log.info("新增员工的数据：{}", employee);
+        //log.info("新增员工的数据：{}", employee);
         //初始密码“123456”，使用md5进行加密
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
         //创建时间
@@ -79,6 +78,29 @@ public class EmployeeController {
         employee.setUpdateUser(empId);
         employeeService.save(employee);
         return Result.success("新增成功");
+    }
+
+    /***
+     * 员工信息分页查询
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public Result<Page> page(int page,int pageSize,String name) {
+        //log.info("page = {},pageSize = {},name = {}" ,page,pageSize,name);
+        //构造分页构造器
+        Page pageInfo = new Page(page,pageSize);
+        //构造条件构造器
+        LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper();
+        //添加过滤条件
+        queryWrapper.like(StringUtils.isNotEmpty(name), Employee::getName, name);
+        //添加排序条件
+        queryWrapper.orderByDesc(Employee::getUpdateTime);
+        //执行查询
+        employeeService.page(pageInfo,queryWrapper);
+        return Result.success(pageInfo);
     }
 
 }
