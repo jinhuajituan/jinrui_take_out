@@ -49,11 +49,11 @@ public class Employee implements Serializable {
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")//插入时填充字段
-    @TableField("create_time")
+    @TableField(fill = FieldFill.INSERT,value = "create_time")
     private LocalDateTime createTime;
 
     @ApiModelProperty(value = "修改时间")//插入和更新时填充字段
-    @TableField("update_time")
+    @TableField(fill = FieldFill.INSERT_UPDATE,value = "update_time")
     private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "创建人")
