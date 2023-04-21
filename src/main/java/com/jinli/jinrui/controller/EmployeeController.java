@@ -1,7 +1,6 @@
 package com.jinli.jinrui.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.Result;
 import com.jinli.jinrui.entity.Employee;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.function.LongConsumer;
 
 @Slf4j
 @RestController
@@ -62,6 +60,12 @@ public class EmployeeController {
         return Result.success("退出成功");
     }
 
+    /***
+     * 新增员工
+     * @param request
+     * @param employee
+     * @return
+     */
     @PostMapping
     public Result<String> save(HttpServletRequest request,@RequestBody Employee employee){
         //log.info("新增员工的数据：{}", employee);

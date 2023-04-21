@@ -92,7 +92,7 @@
     </el-table>
     <el-pagination
             class="pageList"
-            :page-sizes="[2]"
+            :page-sizes="[5,10,15,20,25,30]"
             :page-size="pageSize"
             layout="total, sizes, prev, pager, next, jumper"
             :total="counts"
@@ -107,8 +107,7 @@
 <!-- 引入组件库 -->
 <script src="../../plugins/element-ui/index.js"></script>
 <!-- 引入axios -->
-<!--<script src="../../plugins/axios/axios.min.js"></script>-->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../plugins/axios/axios.min.js"></script>
 <script src="../../js/request.js"></script>
 <script src="../../api/member.js"></script>
 <script>
@@ -119,7 +118,7 @@
         input: '',
         counts: 0,
         page: 1,
-        pageSize: 2,
+        pageSize: 10,
         tableData : [],
         id : '',
         status : '',
