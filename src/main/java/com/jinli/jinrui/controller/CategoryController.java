@@ -78,8 +78,11 @@ public class CategoryController {
     public Result<String> delete(Long id){
         log.info("删除分类，id为：{}",id);
 
-        categoryService.removeById(id);
-        //categoryService.remove(id);
+        //普通删除
+        //categoryService.removeById(id);
+
+        //判断是否有关联，再进行删除
+         categoryService.remove(id);
 
         return Result.success("分类信息删除成功");
     }
