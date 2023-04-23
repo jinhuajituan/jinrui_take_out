@@ -25,7 +25,7 @@ public class DishFlavor implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "菜品id")
-    @TableField("dishId")
+    @TableField("dish_id")
     private Long dishId;
 
     @ApiModelProperty(value = "口味名称")
