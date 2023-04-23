@@ -50,6 +50,18 @@ public class DishController {
     }
 
     /***
+     * 修改菜品信息
+     * @param dishDto
+     * @return
+     */
+    @PutMapping
+    public Result<String> update(@RequestBody DishDto dishDto){
+
+        dishService.updateWithFlavor(dishDto);
+        return Result.success("修改菜品成功");
+    }
+
+    /***
      * 菜品信息分页查询
      * @param page
      * @param pageSize
@@ -94,6 +106,18 @@ public class DishController {
         dishDtoPage.setRecords(list);
 
         return Result.success(dishDtoPage);
+    }
+
+    /***
+     * 根据id查询菜品信息和对应的口味信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<DishDto> get(@PathVariable Long id) {
+        DishDto dishDto = dishService.getByIdWithFlavor(id);
+
+        return Result.success(dishDto);
     }
 
 

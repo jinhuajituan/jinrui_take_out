@@ -53,8 +53,7 @@ public class DishFlavor implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE,value = "update_user")
     private Long updateUser;
 
-    @ApiModelProperty(value = "是否删除")
-    @TableField("isDeleted")
-    private Integer isDeleted;
+    //是否删除
+    //private Integer isDeleted;
 
 }
