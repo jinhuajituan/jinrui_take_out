@@ -20,4 +20,4 @@ mybatis-plus:
     db-config:
       id-type: ASSIGN_ID
 jinrui:
-  path: F:\img\
+  path: F:\课外项目\瑞吉外卖\代码\jinrui_take_out\src\main\resources\static\img\

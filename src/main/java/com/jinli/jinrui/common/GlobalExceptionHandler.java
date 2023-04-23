@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(CustomException.class)
     public Result<String> exceptionHandler(CustomException ex){
-        log.error(ex.getMessage());
+        //log.error(ex.getMessage());
 
         return Result.error(ex.getMessage());
     }
