@@ -9,6 +9,7 @@ import com.jinli.jinrui.entity.Dish;
 import com.jinli.jinrui.service.CategoryService;
 import com.jinli.jinrui.service.DishFlavorService;
 import com.jinli.jinrui.service.DishService;
+import com.sun.javafx.logging.PulseLogger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,18 @@ public class DishController {
 
         dishService.updateWithFlavor(dishDto);
         return Result.success("修改菜品成功");
+    }
+
+    /***
+     * 删除菜品信息
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public Result<String> delete(Long ids){
+        dishService.removeById(ids);
+
+        return Result.success("菜品信息删除成功");
     }
 
     /***
@@ -120,5 +133,25 @@ public class DishController {
         return Result.success(dishDto);
     }
 
+
+    /***
+     * 根据条件查询对应的菜品数据
+     * @param dish
+     * @return
+     */
+    @GetMapping("/list")
+    public Result<List<Dish>> list(Dish dish) {
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
+        //查询状态为1（起售）的数据
+        queryWrapper.eq(Dish::getStatus, 1);
+
+        //添加排序条件
+        queryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+
+        List<Dish> list = dishService.list(queryWrapper);
+
+        return Result.success(list);
+    }
 
 }
