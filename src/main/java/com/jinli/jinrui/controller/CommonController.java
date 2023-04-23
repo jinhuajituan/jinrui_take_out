@@ -39,8 +39,9 @@ public class CommonController {
 
         //原始文件名
         String originalFilename = file.getOriginalFilename();
+        //动态的截取文件的后缀名，通过substring进行截取，在“.”的位置开始
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-        //使用UUID重新编写文件名，防止文件名称重复造成文件覆盖
+        //使用UUID重新编写文件名，防止文件名称重复造成文件覆盖；生成32位随机的字符串
         String fileName = UUID.randomUUID().toString()+ suffix ;
         //创建一个目录对象
         File dir = new File(basePath);

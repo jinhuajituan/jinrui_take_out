@@ -1,5 +1,6 @@
 package com.jinli.jinrui.controller;
 
+import com.jinli.jinrui.service.DishFlavorService;
 import com.jinli.jinrui.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,5 +14,11 @@ public class DishController {
 
     @Autowired
     private DishService dishService;
+
+    @Autowired
+    private DishFlavorService dishFlavorService;
+
+
+
 
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(description = "用户")
+@ApiModel(description = "用户表")
 @TableName("employee")
 public class Employee implements Serializable {
 

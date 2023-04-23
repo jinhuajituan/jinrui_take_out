@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(value = "套餐")
+@ApiModel(value = "套餐表")
 @TableName("setmeal")
 public class Setmeal {
     private static final long serialVersionUID = 1L;
