@@ -78,15 +78,24 @@ public class DishController {
     }
 
     /***
-     * /根据id数量来修改菜品信息的状态
-     * @param params
+     * 根据id数量来修改菜品信息的状态
+     * @param status
      * @return
      */
-    @PutMapping("/status/${params.status}")
-    public Result<String> updateStatus(List<Long> params){
-        log.info("params:{}", params);
+    @PostMapping("/status/{status}")
+    public Result<String> updateStatus(@PathVariable Integer status,Long[] ids){
+        //log.info("停售起售====>"+ status);
+        //log.info("停售起售====>"+ ids);
 
-        return null;
+        //通过id查询数据库，修改id为ids数组中数据的菜品状态，status为前端页面提交的status
+        for (int i = 0; i < ids.length; i++) {
+            Long id = ids[i];
+            //根据id得到每个dish菜品
+            Dish dish = dishService.getById(id);
+            dish.setStatus(status);
+            dishService.updateById(dish);
+        }
+        return Result.success("修改菜品状态成功");
     }
 
     /***
