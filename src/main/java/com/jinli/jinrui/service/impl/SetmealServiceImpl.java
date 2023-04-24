@@ -9,7 +9,9 @@ import com.jinli.jinrui.entity.SetmealDish;
 import com.jinli.jinrui.mapper.SetmealMapper;
 import com.jinli.jinrui.service.SetmealDishService;
 import com.jinli.jinrui.service.SetmealService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
 
     @Autowired
     private SetmealDishService setmealDishService;
+
 
     /**
      * 新增套餐，同时需要保存套餐和菜品的关联关系
@@ -74,5 +77,25 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         //删除关系表中的数据
         setmealDishService.remove(lambdaQueryWrapper);
 
+    }
+
+    /***
+     * 修改套餐数据回填
+     * @param id
+     */
+    public SetmealDto getByIdWithDish(Long id) {
+        //根据id查询setmeal表中的基本信息
+        Setmeal setmeal = this.getById(id);
+        SetmealDto setmealDto = new SetmealDto();
+        //对象拷贝
+        BeanUtils.copyProperties(setmeal, setmealDto);
+
+        //查询关联表setmeal_dish的菜品信息
+        LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SetmealDish::getSetmealId, setmeal.getId());
+        List<SetmealDish> setmealDishList = setmealDishService.list(queryWrapper);
+        //设置套餐菜品属性
+        setmealDto.setSetmealDishes(setmealDishList);
+        return setmealDto;
     }
 }

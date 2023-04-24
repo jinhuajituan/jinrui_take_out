@@ -47,6 +47,13 @@ public class SetmealController {
         return Result.success("新增套餐成功");
     }
 
+    /***
+     * 分页查询
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
     @GetMapping("/page")
     public Result<Page> page(int page, int pageSize  ,String name){
         //分页构造器对象
@@ -99,6 +106,40 @@ public class SetmealController {
         return Result.success("删除套餐");
     }
 
+    /***
+     * 根据id查询套餐信息进行数据回填
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public Result<SetmealDto> getById(@PathVariable Long id){
+        //log.info("根据id查询套餐信息：{}", id);
+        //调用service执行查询
+        SetmealDto setmealDto = setmealService.getByIdWithDish(id);
+        return Result.success(setmealDto);
+    }
+
+
+    /***
+     * 修改套餐
+     * @param setmeal
+     * @return
+     */
+    @PutMapping
+    public Result<String> update(@RequestBody Setmeal setmeal){
+        log.info("setmeal:{}",setmeal);
+
+
+        return null;
+    }
+
+
+    /***
+     * 套餐的停售与启售
+     * @param status
+     * @param ids
+     * @return
+     */
     @PostMapping("/status/{status}")
     public Result<String> uptateStatus(@PathVariable Integer status, Long[] ids){
         log.info("status", status);
