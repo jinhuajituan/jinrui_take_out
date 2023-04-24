@@ -81,11 +81,19 @@
             <el-button
               type="text"
               size="small"
-              class="delBut non"
+              class="delBut"
               @click="statusHandle(scope.row)"
               v-if="user === 'admin'"
             >
               {{ scope.row.status == '1' ? '禁用' : '启用' }}
+            </el-button>
+            <el-button
+                    type="text"
+                    size="small"
+                    class="delBut"
+                    @click="deleteHandle(scope.row.id)"
+            >
+              删除
             </el-button>
           </template>
         </el-table-column>
@@ -184,6 +192,25 @@
                 if (String(res.code) === '1') {
                   this.$message.success('账号状态更改成功！')
                   this.handleQuery()
+                }
+              }).catch(err => {
+                this.$message.error('请求出错了：' + err)
+              })
+            })
+          },
+          //删除
+          deleteHandle(id){
+            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+              'confirmButtonText': '确定',
+              'cancelButtonText': '取消',
+              'type': 'warning'
+            }).then(() => {
+              deleEmployee(id).then(res => {
+                if (res.code === 1) {
+                  this.$message.success('删除成功！')
+                  this.handleQuery()
+                } else {
+                  this.$message.error(res.msg || '操作失败')
                 }
               }).catch(err => {
                 this.$message.error('请求出错了：' + err)

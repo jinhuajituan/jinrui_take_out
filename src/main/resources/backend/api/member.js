@@ -40,3 +40,13 @@ function queryEmployeeById (id) {
     method: 'get'
   })
 }
+
+// 删除当前列的接口
+const deleEmployee= (id) => {
+  return $axios({
+    url: '/employee',
+    method: 'delete',
+    params: { id }
+  })
+}
+

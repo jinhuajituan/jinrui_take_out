@@ -143,5 +143,12 @@ public class EmployeeController {
         return Result.error("没有查询到对应员工信息");
     }
 
+    @DeleteMapping
+    public Result<String> delete(Long id){
+        //log.info("id:{}", id);
+
+        employeeService.removeById(id);
+        return Result.success("删除员工信息成功");
+    }
 
 }
