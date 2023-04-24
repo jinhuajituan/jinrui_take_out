@@ -95,9 +95,10 @@ public class SetmealController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/{id}")
-    public Result<String> delete (List<Long> ids){
-
+    @DeleteMapping
+    public Result<String> delete (@RequestParam List<Long> ids){
+        //log.info("ids:{}", ids);
+        setmealService.removeWithDish(ids);
 
         return Result.success("删除套餐");
     }
