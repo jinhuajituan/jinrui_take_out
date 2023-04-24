@@ -78,6 +78,18 @@ public class DishController {
     }
 
     /***
+     * /根据id数量来修改菜品信息的状态
+     * @param params
+     * @return
+     */
+    @PutMapping("/status/${params.status}")
+    public Result<String> updateStatus(List<Long> params){
+        log.info("params:{}", params);
+
+        return null;
+    }
+
+    /***
      * 菜品信息分页查询
      * @param page
      * @param pageSize

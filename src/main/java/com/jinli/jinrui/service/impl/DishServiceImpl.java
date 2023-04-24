@@ -23,6 +23,10 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
     @Autowired
     private DishFlavorService dishFlavorService;
 
+    /***
+     * 新增菜品信息
+     * @param dishDto
+     */
     @Override
     //开启事务控制，还需要在启动类添加@EnableTransactionManagement注解
     @Transactional
@@ -64,6 +68,10 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         return dishDto;
     }
 
+    /***
+     * 修改菜品信息
+     * @param dishDto
+     */
     @Transactional
     public void updateWithFlavor(DishDto dishDto) {
         //关系dish表基本信息
@@ -83,7 +91,6 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         }).collect(Collectors.toList());
 
         dishFlavorService.saveBatch(flavors);
-
     }
 
     /***
@@ -111,6 +118,15 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         lambdaQueryWrapper.in(DishFlavor::getDishId, ids);
 
         dishFlavorService.remove(lambdaQueryWrapper);
+    }
+
+    /***
+     * 根据id数量来修改菜品信息的状态
+     * @param params
+     */
+    @Override
+    public void updateWithStatus(List<Long> params) {
+
     }
 
 
