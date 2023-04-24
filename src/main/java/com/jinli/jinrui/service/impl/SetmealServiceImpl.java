@@ -54,10 +54,11 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
         //设置查询条件
         //select count(*) from setmeal where id in (1,2,3) and status = 1
-        queryWrapper.eq(Setmeal::getId, ids);
+        queryWrapper.in(Setmeal::getId, ids);
         queryWrapper.eq(Setmeal::getStatus, 1);
-        //使用count来接收复合条件的数据
+        //使用count来接收符合条件的数据
         int count = this.count(queryWrapper);
+
         //如果有符合条件的数据，就会抛出一个业务异常
         if (count > 0) {
             throw new CustomException("该商品正在售卖中，不能删除");
@@ -69,6 +70,7 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         //设置SQL查询语句
         //delete from setmeal_dish where setmeal_id in (1,2,3)
         lambdaQueryWrapper.in(SetmealDish::getSetmealId, ids);
+
         //删除关系表中的数据
         setmealDishService.remove(lambdaQueryWrapper);
 

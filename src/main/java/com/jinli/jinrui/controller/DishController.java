@@ -68,8 +68,11 @@ public class DishController {
      * @return
      */
     @DeleteMapping
-    public Result<String> delete(Long ids){
-        dishService.removeById(ids);
+    public Result<String> delete(@RequestParam List<Long> ids){
+        //普通删除
+        //dishService.removeById(ids);
+
+        dishService.removeWithFlavor(ids);
 
         return Result.success("菜品信息删除成功");
     }
