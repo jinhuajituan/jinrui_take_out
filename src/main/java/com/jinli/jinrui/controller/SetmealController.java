@@ -6,18 +6,14 @@ import com.jinli.jinrui.common.Result;
 import com.jinli.jinrui.dto.SetmealDto;
 import com.jinli.jinrui.entity.Category;
 import com.jinli.jinrui.entity.Setmeal;
-import com.jinli.jinrui.entity.SetmealDish;
 import com.jinli.jinrui.service.CategoryService;
 import com.jinli.jinrui.service.SetmealDishService;
 import com.jinli.jinrui.service.SetmealService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.Base64Util;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Name;
-import java.awt.print.PageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -101,6 +97,22 @@ public class SetmealController {
         setmealService.removeWithDish(ids);
 
         return Result.success("删除套餐");
+    }
+
+    @PostMapping("/status/{status}")
+    public Result<String> uptateStatus(@PathVariable Integer status, Long[] ids){
+        log.info("status", status);
+        log.info("ids", ids);
+
+        //通过id查询数据库，修改id为ids数组中数据的菜品状态，status为前端页面提交的status
+        for (int i = 0; i < ids.length; i++) {
+            Long id = ids[i];
+            //根据id得到每个dish菜品
+            Setmeal setmeal = setmealService.getById(id);
+            setmeal.setStatus(status);
+            setmealService.updateById(setmeal);
+        }
+        return Result.success("修改套餐状态成功");
     }
 
 }

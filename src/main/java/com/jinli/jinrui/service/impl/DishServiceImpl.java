@@ -120,14 +120,4 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         dishFlavorService.remove(lambdaQueryWrapper);
     }
 
-    /***
-     * 根据id数量来修改菜品信息的状态
-     * @param params
-     */
-    @Override
-    public void updateWithStatus(List<Long> params) {
-
-    }
-
-
 }

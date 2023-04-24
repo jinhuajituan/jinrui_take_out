@@ -19,7 +19,4 @@ public interface DishService extends IService<Dish> {
     //根据id查询菜品信息和对应的口味信息进行删除
     public void removeWithFlavor(List<Long> ids);
 
-    //根据id数量来修改菜品信息的状态
-    public void updateWithStatus(List<Long> params);
-
 }
