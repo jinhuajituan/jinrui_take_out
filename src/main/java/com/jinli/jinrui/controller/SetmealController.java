@@ -107,7 +107,7 @@ public class SetmealController {
     }
 
     /***
-     * 根据id查询套餐信息进行数据回填
+     * 根据id查询套餐信息
      * @param id
      * @return
      */
@@ -154,6 +154,22 @@ public class SetmealController {
             setmealService.updateById(setmeal);
         }
         return Result.success("修改套餐状态成功");
+    }
+
+    /***
+     * 根据条件查询套餐数据
+     * @param setmeal
+     * @return
+     */
+    @GetMapping("/list")
+    public Result<List<Setmeal>> list(Setmeal setmeal) {
+        LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(setmeal.getCategoryId() != null, Setmeal::getCategoryId, setmeal.getCategoryId());
+        queryWrapper.eq(setmeal.getStatus() != null, Setmeal::getStatus, setmeal.getStatus());
+        queryWrapper.orderByDesc(Setmeal::getUpdateTime);
+        List<Setmeal> list = setmealService.list(queryWrapper);
+
+        return Result.success(list);
     }
 
 }
