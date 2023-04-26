@@ -1,7 +1,6 @@
 package com.jinli.jinrui.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.Result;
 import com.jinli.jinrui.dto.SetmealDto;
