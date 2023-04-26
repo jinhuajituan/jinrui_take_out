@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(value = "菜品表")
+@ApiModel(description = "菜品表")
 @TableName("dish")
 public class Dish implements Serializable {
     private static final long serialVersionUID = 1L;

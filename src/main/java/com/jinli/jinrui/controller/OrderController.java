@@ -68,8 +68,8 @@ public class OrderController {
         //添加查询条件  动态sql  字符串使用StringUtils.isNotEmpty这个方法来判断
         //这里使用了范围查询的动态SQL，这里是重点！！！
         queryWrapper.like(number!=null,Orders::getNumber,number)
-                .gt(StringUtils.isNotEmpty(beginTime),Orders::getOrderTime,beginTime)
-                .lt(StringUtils.isNotEmpty(endTime),Orders::getOrderTime,endTime);
+                .ge(StringUtils.isNotEmpty(beginTime),Orders::getOrderTime,beginTime)
+                .le(StringUtils.isNotEmpty(endTime),Orders::getOrderTime,endTime);
 
         orderService.page(pageInfo,queryWrapper);
         return Result.success(pageInfo);

@@ -10,11 +10,8 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
-菜品口味
- */
 @Data
-@ApiModel(value = "菜品口味关系表")
+@ApiModel(description = "菜品口味关系表")
 @TableName("dish_flavor")
 public class DishFlavor implements Serializable {
 
@@ -53,7 +50,6 @@ public class DishFlavor implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE,value = "update_user")
     private Long updateUser;
 
-    //是否删除
+    //@ApiModelProperty(value = "是否删除")
     //private Integer isDeleted;
-
 }
