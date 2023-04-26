@@ -1,6 +1,7 @@
 package com.jinli.jinrui.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.Result;
 import com.jinli.jinrui.dto.SetmealDto;
@@ -106,33 +107,32 @@ public class SetmealController {
         return Result.success("删除套餐");
     }
 
-    /***
+    /**
      * 根据id查询套餐信息
+     *(套餐信息的回显)
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    public Result<SetmealDto> getById(@PathVariable Long id){
-        //log.info("根据id查询套餐信息：{}", id);
-        //调用service执行查询
+    public Result<SetmealDto> getById(@PathVariable Long id) {
+        log.info("根据id查询套餐信息:{}", id);
+        // 调用service执行查询。
         SetmealDto setmealDto = setmealService.getByIdWithDish(id);
         return Result.success(setmealDto);
     }
 
-
-    /***
-     * 修改套餐
-     * @param setmeal
+    /**
+     * 修改套餐信息。
+     * @param setmealDto
      * @return
      */
     @PutMapping
-    public Result<String> update(@RequestBody Setmeal setmeal){
-        log.info("setmeal:{}",setmeal);
-
-
-        return null;
+    public Result<String> update(@RequestBody SetmealDto setmealDto) {
+        log.info("修改套餐信息{}", setmealDto);
+        // 执行更新。
+        setmealService.updateWithDish(setmealDto);
+        return Result.success("修改套餐信息成功");
     }
-
 
     /***
      * 套餐的停售与启售

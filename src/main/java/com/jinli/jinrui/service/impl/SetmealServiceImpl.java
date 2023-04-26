@@ -79,18 +79,19 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
 
     }
 
-    /***
-     * 修改套餐数据回填
-     * @param id
+    /**
+     * 通过id查询套餐信息， 同时还要查询关联表setmeal_dish的菜品信息进行回显。
+     *
+     * @param id 待查询的idg
      */
+    @Override
     public SetmealDto getByIdWithDish(Long id) {
-        //根据id查询setmeal表中的基本信息
+        // 根据id查询setmeal表中的基本信息
         Setmeal setmeal = this.getById(id);
         SetmealDto setmealDto = new SetmealDto();
-        //对象拷贝
+        // 对象拷贝。
         BeanUtils.copyProperties(setmeal, setmealDto);
-
-        //查询关联表setmeal_dish的菜品信息
+        // 查询关联表setmeal_dish的菜品信息
         LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SetmealDish::getSetmealId, setmeal.getId());
         List<SetmealDish> setmealDishList = setmealDishService.list(queryWrapper);
@@ -98,4 +99,36 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         setmealDto.setSetmealDishes(setmealDishList);
         return setmealDto;
     }
+
+    /**
+     * 更新套餐信息，不仅要更新setmeal基本信息， 还要更新套餐所对应的菜品到setmeal_dish表
+     *
+     * @param setmealDto
+     */
+    @Override
+    public void updateWithDish(SetmealDto setmealDto) {
+        // 保存setmeal表中的基本数据。
+        this.updateById(setmealDto);
+        // 先删除原来的套餐所对应的菜品数据。
+        LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SetmealDish::getSetmealId, setmealDto.getId());
+        setmealDishService.remove(queryWrapper);
+        // 更新套餐关联菜品信息。setmeal_dish表。
+        // Field 'setmeal_id' doesn't have a default value] with root cause
+        // 所以需要处理setmeal_id字段。
+        // 先获得套餐所对应的菜品集合。
+        List<SetmealDish> setmealDishes = setmealDto.getSetmealDishes();
+        //每一个item为SetmealDish对象。
+        setmealDishes = setmealDishes.stream().map((item) -> {
+            //设置setmeal_id字段。
+            item.setSetmealId(setmealDto.getId());
+            return item;
+        }).collect(Collectors.toList());
+
+        // 重新保存套餐对应菜品数据
+        setmealDishService.saveBatch(setmealDishes);
+    }
+
+
+
 }
