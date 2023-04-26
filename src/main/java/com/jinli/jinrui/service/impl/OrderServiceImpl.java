@@ -103,4 +103,18 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
         //清空购物车数据
         shoppingCartService.remove(wrapper);
     }
+
+    /***
+     * 通过Id查询数据
+     * @param orderId
+     * @return
+     */
+    @Override
+    public List<OrderDetail> getOrderDetailById(Long orderId) {
+        LambdaQueryWrapper<OrderDetail> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(OrderDetail::getOrderId, orderId);
+
+        List<OrderDetail> orderDetailList = orderDetailService.list(queryWrapper);
+        return orderDetailList;
+    }
 }

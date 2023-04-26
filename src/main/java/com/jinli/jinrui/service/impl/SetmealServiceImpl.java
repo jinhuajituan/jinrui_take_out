@@ -11,7 +11,6 @@ import com.jinli.jinrui.service.SetmealDishService;
 import com.jinli.jinrui.service.SetmealService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
