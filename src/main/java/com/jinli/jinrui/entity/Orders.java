@@ -27,7 +27,7 @@ public class Orders implements Serializable {
 
     //订单状态 1待付款，2待派送，3已派送，4已完成，5已取消
     @ApiModelProperty("订单号")
-    @TableField("number")
+    @TableField("status")
     private Integer status;
 
     @ApiModelProperty("下单用户id")

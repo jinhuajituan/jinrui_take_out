@@ -85,7 +85,7 @@ public class EmployeeController {
         return Result.success("新增成功");
     }
 
-    /***
+    /**
      * 员工信息分页查询
      * @param page
      * @param pageSize
@@ -143,7 +143,7 @@ public class EmployeeController {
         return Result.error("没有查询到对应员工信息");
     }
 
-    /***
+    /**
      * 删除数据
      * @param id
      * @return
