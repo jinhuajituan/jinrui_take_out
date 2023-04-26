@@ -1,6 +1,7 @@
 package com.jinli.jinrui.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.BaseContext;
 import com.jinli.jinrui.common.Result;
@@ -169,10 +170,21 @@ public class OrderController {
         return Result.success("操作成功");
     }
 
-    @PutMapping
-    public Result<String> update(Long id){
 
-        return null;
+    /**
+     * 派送
+     * @param orders
+     * @return
+     */
+    @PutMapping
+    public Result<String> update(@RequestBody Orders orders){
+
+        LambdaUpdateWrapper<Orders> queryWrapper = new LambdaUpdateWrapper<>();
+        queryWrapper.in(Orders::getId, orders.getId());
+        queryWrapper.set(Orders::getStatus,orders.getStatus());
+
+        orderService.update(queryWrapper);
+        return Result.success("派送完成");
     }
 
 

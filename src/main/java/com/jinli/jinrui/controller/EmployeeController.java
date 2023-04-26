@@ -48,7 +48,7 @@ public class EmployeeController {
         return Result.success(emp);
     }
 
-    /***
+    /**
      * 退出登录
      * @param request
      * @return
@@ -60,7 +60,7 @@ public class EmployeeController {
         return Result.success("退出成功");
     }
 
-    /***
+    /**
      * 新增员工
      * @param request
      * @param employee

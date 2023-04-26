@@ -38,7 +38,7 @@ public class DishController {
     @Autowired
     private CategoryService categoryService;
 
-    /***
+    /**
      * 新增菜品
      * @param dishDto
      * @return
@@ -51,7 +51,7 @@ public class DishController {
         return Result.success("新增菜品成功");
     }
 
-    /***
+    /**
      * 修改菜品信息
      * @param dishDto
      * @return
@@ -63,7 +63,7 @@ public class DishController {
         return Result.success("修改菜品成功");
     }
 
-    /***
+    /**
      * 删除菜品信息
      * @param ids
      * @return
@@ -78,7 +78,7 @@ public class DishController {
         return Result.success("菜品信息删除成功");
     }
 
-    /***
+    /**
      * 根据id数量来修改菜品信息的状态
      * @param status
      * @return
@@ -99,7 +99,7 @@ public class DishController {
         return Result.success("修改菜品状态成功");
     }
 
-    /***
+    /**
      * 菜品信息分页查询
      * @param page
      * @param pageSize
@@ -146,7 +146,7 @@ public class DishController {
         return Result.success(dishDtoPage);
     }
 
-    /***
+    /**
      * 根据id查询菜品信息和对应的口味信息
      * @param id
      * @return
@@ -158,26 +158,11 @@ public class DishController {
         return Result.success(dishDto);
     }
 
-
-    /***
+    /**
      * 根据条件查询对应的菜品数据
      * @param dish
      * @return
      */
-    /*@GetMapping("/list")
-    public Result<List<Dish>> list(Dish dish) {
-        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId, dish.getCategoryId());
-        //查询状态为1（起售）的数据
-        queryWrapper.eq(Dish::getStatus, 1);
-
-        //添加排序条件
-        queryWrapper.orderByDesc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
-
-        List<Dish> list = dishService.list(queryWrapper);
-
-        return Result.success(list);
-    }*/
     @GetMapping("/list")
     public Result<List<DishDto>> list(Dish dish) {
         LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
@@ -214,6 +199,5 @@ public class DishController {
 
         return Result.success(dishDtoList);
     }
-
 
 }

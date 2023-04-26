@@ -29,7 +29,7 @@ public class CommonController {
     @Value("${jinrui.path}")
     private String basePath;
 
-    /*
+    /**
      * 文件上传
      * */
     @PostMapping("/upload")
@@ -59,7 +59,7 @@ public class CommonController {
         return Result.success(fileName);
     }
 
-    /*
+    /**
      * 文件下载
      * */
     @GetMapping("/download")

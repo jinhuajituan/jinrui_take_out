@@ -97,5 +97,4 @@ public class AddressBookController {
         //SQL:select * from address_book where user_id = ? order by update_time desc
         return Result.success(addressBookService.list(queryWrapper));
     }
-
 }

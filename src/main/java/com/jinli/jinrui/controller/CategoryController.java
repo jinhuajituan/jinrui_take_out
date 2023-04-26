@@ -101,7 +101,7 @@ public class CategoryController {
         return Result.success("修改分类信息成功");
     }
 
-    /*
+    /**
     *  根据条件来动态的获取下拉框分类数据
     * */
     @GetMapping("/list")

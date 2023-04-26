@@ -34,7 +34,7 @@ public class SetmealController {
     @Autowired
     private CategoryService categoryService;
 
-    /***
+    /**
      * 新增套餐
      * @param setmealDto
      * @return
@@ -47,7 +47,7 @@ public class SetmealController {
         return Result.success("新增套餐成功");
     }
 
-    /***
+    /**
      * 分页查询
      * @param page
      * @param pageSize
@@ -93,7 +93,7 @@ public class SetmealController {
         return Result.success(dtoPage);
     }
 
-    /***
+    /**
      * 删除套餐
      * @param ids
      * @return
@@ -133,7 +133,7 @@ public class SetmealController {
         return Result.success("修改套餐信息成功");
     }
 
-    /***
+    /**
      * 套餐的停售与启售
      * @param status
      * @param ids
@@ -155,7 +155,7 @@ public class SetmealController {
         return Result.success("修改套餐状态成功");
     }
 
-    /***
+    /**
      * 根据条件查询套餐数据
      * @param setmeal
      * @return
