@@ -3,14 +3,10 @@ package com.jinli.jinrui.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jinli.jinrui.common.Result;
-import com.jinli.jinrui.dto.DishDto;
 import com.jinli.jinrui.dto.SetmealDto;
 import com.jinli.jinrui.entity.Category;
-import com.jinli.jinrui.entity.Dish;
 import com.jinli.jinrui.entity.Setmeal;
-import com.jinli.jinrui.entity.SetmealDish;
 import com.jinli.jinrui.service.CategoryService;
-import com.jinli.jinrui.service.DishService;
 import com.jinli.jinrui.service.SetmealDishService;
 import com.jinli.jinrui.service.SetmealService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +24,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/setmeal")
 public class SetmealController {
-
-    @Autowired
-    private DishService dishService;
 
     @Autowired
     private SetmealService setmealService;
@@ -178,28 +171,4 @@ public class SetmealController {
         return Result.success(list);
     }
 
-    /**
-     * 根据条件查询对应的套餐数据
-     * @param Setmealid
-     * @return
-     */
-    @GetMapping("/dish/{id}")
-    public Result<List<DishDto>> dish(@PathVariable("id") Long Setmealid){
-        LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(SetmealDish::getSetmealId, Setmealid);
-        //获取套餐里面的所有菜品，这个就是SetmealDish表里面的数据
-        List<SetmealDish> list = setmealDishService.list(queryWrapper);
-
-        List<DishDto> dishDtos = list.stream().map((setmealDish) ->{
-            DishDto dishDto = new DishDto();
-            //浅拷贝
-            BeanUtils.copyProperties(setmealDish, dishDto);
-            //把套餐中的菜品基本信息填充到dto中
-            Long dishId = setmealDish.getDishId();
-            Dish dish = dishService.getById(dishId);
-            BeanUtils.copyProperties(dish, dishDto);
-            return dishDto;
-        }).collect(Collectors.toList());
-        return Result.success(dishDtos);
-    }
 }

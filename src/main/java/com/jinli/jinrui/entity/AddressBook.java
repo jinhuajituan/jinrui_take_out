@@ -38,7 +38,7 @@ public class AddressBook implements Serializable {
     private String sex;
 
     @ApiModelProperty("省级区划编号")
-    @TableField("province_code")
+    @TableField("provinceCode")
     private String provinceCode;
 
     @ApiModelProperty("省级名称")
@@ -46,7 +46,7 @@ public class AddressBook implements Serializable {
     private String provinceName;
 
     @ApiModelProperty("市级区划编号")
-    @TableField("city_code")
+    @TableField("cityCode")
     private String cityCode;
 
     @ApiModelProperty("市级名称")
@@ -74,21 +74,20 @@ public class AddressBook implements Serializable {
     @TableField("is_default")
     private Integer isDefault;
 
-    @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT,value = "create_time")
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.UPDATE,value = "update_time")
+    @ApiModelProperty("更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-
-    @ApiModelProperty(value = "创建人")
-    @TableField(fill = FieldFill.INSERT,value = "create_user")
+    @ApiModelProperty("创建人")
+    @TableField(fill = FieldFill.INSERT)
     private Long createUser;
 
-    @ApiModelProperty(value = "修改人")
-    @TableField(fill = FieldFill.INSERT_UPDATE,value = "update_user")
+    @ApiModelProperty("修改人")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
 
 
