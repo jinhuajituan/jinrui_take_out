@@ -179,7 +179,7 @@ public class SetmealController {
     }
 
     /**
-     * 根据条件查询对应的套餐数据（手机端点击查看）
+     * 根据条件查询对应的套餐数据
      * @param Setmealid
      * @return
      */
