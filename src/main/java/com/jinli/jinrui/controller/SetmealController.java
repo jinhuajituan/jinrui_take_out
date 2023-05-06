@@ -185,19 +185,26 @@ public class SetmealController {
      */
     @GetMapping("/dish/{id}")
     public Result<List<DishDto>> dish(@PathVariable("id") Long Setmealid){
+        log.info(Setmealid.toString());
+        //使用LambdaQueryWrapper查询SetmealDish表中的数据
         LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
+        //获取到getSetmealId返回的id
         queryWrapper.eq(SetmealDish::getSetmealId, Setmealid);
         //获取套餐里面的所有菜品，这个就是SetmealDish表里面的数据
         List<SetmealDish> list = setmealDishService.list(queryWrapper);
 
+        //对获取到的list列表进行遍历
         List<DishDto> dishDtos = list.stream().map((setmealDish) ->{
+            //new一个对象用来接收数据
             DishDto dishDto = new DishDto();
-            //浅拷贝
+            //浅拷贝(只复制内容,不复制存储地址)
             BeanUtils.copyProperties(setmealDish, dishDto);
             //把套餐中的菜品基本信息填充到dto中
             Long dishId = setmealDish.getDishId();
             Dish dish = dishService.getById(dishId);
+            //拷贝
             BeanUtils.copyProperties(dish, dishDto);
+            //返回套餐中的数据
             return dishDto;
         }).collect(Collectors.toList());
         return Result.success(dishDtos);

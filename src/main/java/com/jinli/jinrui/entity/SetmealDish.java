@@ -42,10 +42,8 @@ public class SetmealDish implements Serializable {
     @TableField("copies")
     private Integer copies;
 
-
-    //排序
-    @ApiModelProperty("")
-    @TableField("")
+    @ApiModelProperty("排序")
+    @TableField("sort")
     private Integer sort;
 
 
