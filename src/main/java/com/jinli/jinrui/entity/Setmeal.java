@@ -7,13 +7,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @ApiModel(value = "套餐表")
 @TableName("setmeal")
-public class Setmeal {
+public class Setmeal implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "套餐id")
