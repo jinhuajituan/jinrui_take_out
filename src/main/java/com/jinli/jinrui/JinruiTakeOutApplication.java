@@ -16,6 +16,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 public class JinruiTakeOutApplication {
 	public static void main(String[] args) {
+		/*
+		* 访问路径 ：客户端 - http://localhost:8080/backend/page/login/login.html
+		* 		   移动端 - http://localhost:8080/front/page/login.html
+		* */
 		SpringApplication.run(JinruiTakeOutApplication.class, args);
 	}
 }
